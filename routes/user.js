@@ -3,11 +3,18 @@ var router = express.Router();
 
 /* GET users listing. */
 router.post('/login', function(req, res, next) {
-  console.log("login");
-  var login = req.param.login;
-  var password = req.param.password;
+  var login = req.param('login');
+  var password = req.param('password');
 
-  res.session.login = login;
+  if (login == undefined || password == undefined){
+    next();
+  }
+  res.session.auth = login;
+  res.redirect('/chat');
+});
+
+/* GET users listing. */
+router.post('/login', function(req, res, next) {
   res.send("lol");
 });
 
